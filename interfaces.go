@@ -21,6 +21,11 @@ func (a Rect) perimeter() float64   { return 2 * (a.height + a.width) }
 func (a Circle) perimeter() float64 { return 2 * math.Pi * a.radius }
 func (a Circle) diameter() float64  { return 2 * a.radius }
 
+type Shape struct{}
+
+func (a Shape) perimeter() float64 { return 0 }
+func (a Shape) area() float64      { return 0 }
+
 func measure(g Geometry) {
 	fmt.Println(g)
 	fmt.Printf("  area: %3.2f, perimeter: %3.2f\n", g.area(), g.perimeter())
@@ -37,6 +42,13 @@ func main() {
 	PrintType(9)
 	PrintType("Text")
 	PrintType(3.14)
+
+	s := Shape{}
+	PrintType(s)
+	measure(s)
+	var g Geometry
+	fmt.Println("struct and interface are equal:", s == g)
+
 }
 
 func MyPrintln(pars ...interface{}) {
